@@ -1,0 +1,6 @@
+D:/libsString/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/libsString/cmake-build-debug/CMakeFiles/libsString.dir
+D:/libsString/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/libsString/cmake-build-debug/string/CMakeFiles/edit_cache.dir
+D:/libsString/cmake-build-debug/string/CMakeFiles/string.dir
+D:/libsString/cmake-build-debug/string/CMakeFiles/rebuild_cache.dir
