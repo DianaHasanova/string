@@ -5,6 +5,7 @@
 #ifndef LIBSSTRING_STRING__H
 #define LIBSSTRING_STRING__H
 
+
 #include<stdio.h>
 
 //возвращает количество символов в строке(не считая ноль-символ).
@@ -68,5 +69,9 @@ void assertString(const char *expected, char *got,
                   char const *fileName, char const *funcName, int line);
 
 char *copyIf2(char *beginSource, const char *endSource, char *beginDestination, int (*f)(int, int));
+
+#define MAX_STRING_SIZE 100
+
+
 
 #endif //LIBSSTRING_STRING__H

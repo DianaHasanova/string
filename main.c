@@ -3,6 +3,7 @@
 #include <assert.h>
 #include "string/tasks/string_.h"
 #include <ctype.h>
+#include <string.h>
 
 /*
 void test_strlen_emptyLine() {
@@ -176,9 +177,81 @@ void test_removeAdjacentEqualLetters() {
     ASSERT_STRING("a w d ef787", str);
 }
 
+
+//task3
+typedef struct WordDescriptor {
+    char *begin; // позиция начала слова
+    char *end; // позиция первого символа, после последнего символа слова
+} WordDescriptor;
+
+
+int getWord(char *beginSearch, WordDescriptor *word) {
+    word->begin = findNonSpace(beginSearch);
+    if (*word->begin == '\0')
+        return 0;
+
+    word->end = findSpace(word->begin);
+
+    return 1;
+}
+
+void digitToStart(WordDescriptor word) {
+    char _stringBuffer[MAX_STRING_SIZE + 1];
+    char *endStringBuffer = copy(word.begin, word.end, _stringBuffer);
+    char *recPosition = copyIfReverse(endStringBuffer - 1, _stringBuffer - 1,
+                                      word.begin, isdigit);
+    copyIf(_stringBuffer, endStringBuffer, recPosition, isalpha);
+}
+
+void task3(char *beginString) {
+    char *beginSearch = beginString;
+
+    WordDescriptor word; // считываемое слово
+    while (getWord(beginSearch, &word)) {
+        digitToStart(word);
+        beginSearch = word.end;
+    }
+}
+
+void test_task3() {
+    char str[] = "a4   w3j4 d 7eeef456";
+    task3(str);
+    ASSERT_STRING("4a   43wj d 6547eeef", str);
+}
+
+//
+
+void lettersToStart(WordDescriptor word) {
+    char _stringBuffer[MAX_STRING_SIZE + 1];
+    char *endStringBuffer = copy(word.begin, word.end, _stringBuffer);
+    char *recPosition = copyIf(_stringBuffer, endStringBuffer,
+                               word.begin, isalpha);
+    copyIf(_stringBuffer, endStringBuffer, recPosition, isdigit);
+}
+
+void transfersLettersToTheBeginningOfAWordAndNumbersToTheEndWhileMaintainingOrder(char *beginString) {
+    char *beginSearch = beginString;
+
+    WordDescriptor word; // считываемое слово
+    while (getWord(beginSearch, &word)) {
+        lettersToStart(word);
+        beginSearch = word.end;
+    }
+}
+
+void test_transfersLettersToTheBeginningOfAWordAndNumbersToTheEndWhileMaintainingOrder() {
+    char str[] = "5a4   w3j4 d 7eeef456";
+    transfersLettersToTheBeginningOfAWordAndNumbersToTheEndWhileMaintainingOrder(str);
+    ASSERT_STRING("a54   wj34 d eeef7456", str);
+}
+
+
 void test_tasks() {
-    test_removeNonLetters();
-    test_removeAdjacentEqualLetters();
+    // test_removeNonLetters();
+    // test_removeAdjacentEqualLetters();
+    test_task3();
+    test_transfersLettersToTheBeginningOfAWordAndNumbersToTheEndWhileMaintainingOrder();
+
 }
 
 
