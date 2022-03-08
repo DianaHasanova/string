@@ -64,16 +64,6 @@ int strcmp(const char *lhs, const char *rhs) {
     return *lhs - *rhs;
 }
 
-char *copy_(const char *beginSource, const char *endSource, char *beginDestination) {
-    while (beginSource < endSource) {
-        *beginDestination = *beginSource;
-        beginSource++;
-        beginDestination++;
-    }
-
-    return beginDestination;
-}
-
 char *copy(const char *beginSource, const char *endSource, char *beginDestination) {
     size_t size = endSource - beginSource;
     memcpy(beginDestination, beginSource, size);
@@ -81,7 +71,7 @@ char *copy(const char *beginSource, const char *endSource, char *beginDestinatio
     return beginDestination + size;
 }
 
-char *copyIf(char *beginSource, const char *endSource, char *beginDestination, int (*f)(char)) {
+char *copyIf(char *beginSource, const char *endSource, char *beginDestination, int (*f)(int)) {
     while (beginSource < endSource) {
         if (f(*beginSource)) {
             *beginDestination = *beginSource;
@@ -105,6 +95,21 @@ char *copyIfReverse(char *rbeginSource, const char *rendSource, char *beginDesti
     return beginDestination;
 }
 
-int isNotAGap(char i) {
+int isNotAGap(int i) {
     return i != ' ';
+}
+
+char *getEndOfString(char *str) {
+    return str + strlen_(str) ;
+}
+
+void assertString(const char *expected, char *got,
+                  char const *fileName, char const *funcName, int line) {
+    if (strcmp(expected, got)) {
+        fprintf(stderr, " File %s\n", fileName);
+        fprintf(stderr, "%s - failed on line %d\n", funcName, line);
+        fprintf(stderr, " Expected : \"%s\"\n", expected);
+        fprintf(stderr, "Got: \"%s\"\n\n", got);
+    } else
+        fprintf(stderr, "%s - OK\n", funcName);
 }

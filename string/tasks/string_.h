@@ -24,6 +24,8 @@ char *findNonSpace(char *begin);
 //начиная с begin или на первый ноль-символ
 char *findSpace(char *begin);
 
+char *getEndOfString(char *str);
+
 char *findNonSpaceReverse_(char *str);
 
 //возвращает указатель на первый справа символ, отличный от пробельных, расположенный на ленте памяти,
@@ -51,7 +53,7 @@ char *copy(const char *beginSource, const char *endSource, char *beginDestinatio
 // записывает по адресу beginDestination элементы из фрагмента памяти начиная
 // с beginSource заканчивая endSource, удовлетворяющие функции-предикату f.
 // Возвращает указатель на следующий свободный для записи фрагмент в памяти
-char *copyIf(char *beginSource, const char *endSource, char *beginDestination, int (*f)(char));
+char *copyIf(char *beginSource, const char *endSource, char *beginDestination, int (*f)(int));
 
 //записывает по адресу beginDestination элементы из фрагмента памяти
 //начиная с rbeginSource заканчивая rendSource, удовлетворяющие функции-предикату f.
@@ -59,6 +61,10 @@ char *copyIf(char *beginSource, const char *endSource, char *beginDestination, i
 char *copyIfReverse(char *rbeginSource, const char *rendSource, char *beginDestination, int (*f)(char));
 
 //возвращает 0, если i пробельный символ, иначе - 1
-int isNotAGap(char i);
+int isNotAGap(int i);
+
+
+void assertString(const char *expected, char *got,
+                  char const *fileName, char const *funcName, int line);
 
 #endif //LIBSSTRING_STRING__H

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "string/tasks/string_.h"
+#include <ctype.h>
 
 void test_strlen_emptyLine() {
     char *str = "";
@@ -106,6 +107,11 @@ void test_copyIfReverse() {
     assert(strcmp(str2, "u78hgg") == 0);
 }
 
+void test_getEndOfString() {
+    char *str = "a  w d ef";
+    assert(getEndOfString(str) == str + 9);
+}
+
 void testLib() {
     test_strlen_emptyLine();
     test_strlen_();
@@ -126,10 +132,43 @@ void testLib() {
     test_copy();
     test_copyIf();
     test_copyIfReverse();
+    test_getEndOfString();
 }
+
+
+//                                 Task
+
+
+#define ASSERT_STRING(expected, got) assertString(expected,got, \
+ __FILE__ , __FUNCTION__ , __LINE__ )
+
+//task 1
+
+void removeNonLetters(char *s) {
+    char *endSource = getEndOfString(s);
+    char *destination = copyIf(s, endSource, s, isgraph);
+    *destination = '\0';
+
+}
+
+void test_removeNonLetters() {
+    char str[] = "a  w d ef78 87#";
+    removeNonLetters(str);
+    ASSERT_STRING("awdef7887#", str);
+}
+
+
+//task2
+
+
+void test_tasks() {
+    test_removeNonLetters();
+}
+
 
 int main() {
     testLib();
+    test_tasks();
 
     return 0;
 }
