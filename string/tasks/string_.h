@@ -70,7 +70,9 @@ void assertString(const char *expected, char *got,
 
 char *copyIf2(char *beginSource, const char *endSource, char *beginDestination, int (*f)(int, int));
 
-#define MAX_STRING_SIZE 100
+# define MAX_STRING_SIZE 100
+# define MAX_N_WORDS_IN_STRING 100
+# define MAX_WORD_SIZE 20
 
 
 

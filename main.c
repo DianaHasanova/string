@@ -246,12 +246,40 @@ void test_transfersLettersToTheBeginningOfAWordAndNumbersToTheEndWhileMaintainin
 }
 
 
+//task4
+void replaceEachDigitOfTheStringWithTheCorrespondingNumberOfSpaces(char *beginString) {
+    char *_stringBuffer = malloc(MAX_STRING_SIZE + 1);
+    char *endStringBuffer = copy(beginString, getEndOfString(beginString), _stringBuffer);
+
+    while (_stringBuffer < endStringBuffer) {
+        if (isdigit(*_stringBuffer)) {
+            int digit = *_stringBuffer - '0';
+            while (digit > 0) {
+                *beginString = ' ';
+                beginString++;
+                digit--;
+            }
+        } else {
+            *beginString = *_stringBuffer;
+            beginString++;
+        }
+        _stringBuffer++;
+    }
+    *beginString = '\0';
+}
+
+void test_replaceEachDigitOfTheStringWithTheCorrespondingNumberOfSpaces() {
+    char str[] = "A3B0C1";
+    replaceEachDigitOfTheStringWithTheCorrespondingNumberOfSpaces(str);
+    ASSERT_STRING("A   BC ", str);
+}
+
 void test_tasks() {
     // test_removeNonLetters();
     // test_removeAdjacentEqualLetters();
-    test_task3();
-    test_transfersLettersToTheBeginningOfAWordAndNumbersToTheEndWhileMaintainingOrder();
-
+    //test_task3();
+    //test_transfersLettersToTheBeginningOfAWordAndNumbersToTheEndWhileMaintainingOrder();
+    test_replaceEachDigitOfTheStringWithTheCorrespondingNumberOfSpaces();
 }
 
 
