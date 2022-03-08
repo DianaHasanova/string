@@ -67,4 +67,6 @@ int isNotAGap(int i);
 void assertString(const char *expected, char *got,
                   char const *fileName, char const *funcName, int line);
 
+char *copyIf2(char *beginSource, const char *endSource, char *beginDestination, int (*f)(int, int));
+
 #endif //LIBSSTRING_STRING__H

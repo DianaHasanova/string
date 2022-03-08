@@ -4,6 +4,7 @@
 #include "string/tasks/string_.h"
 #include <ctype.h>
 
+/*
 void test_strlen_emptyLine() {
     char *str = "";
     assert(strlen_(str) == 0);
@@ -134,7 +135,7 @@ void testLib() {
     test_copyIfReverse();
     test_getEndOfString();
 }
-
+*/
 
 //                                 Task
 
@@ -159,15 +160,30 @@ void test_removeNonLetters() {
 
 
 //task2
+int areNotDuplicateCharacters(int a, int b) {
+    return a != b;
+}
 
+void removeAdjacentEqualLetters(char *s) {
+    char *endSource = getEndOfString(s) - 1;
+    char *destination = copyIf2(s, endSource, s, areNotDuplicateCharacters);
+    *destination = '\0';
+}
+
+void test_removeAdjacentEqualLetters() {
+    char str[] = "a    ww d eeef7887#";
+    removeAdjacentEqualLetters(str);
+    ASSERT_STRING("a w d ef787", str);
+}
 
 void test_tasks() {
     test_removeNonLetters();
+    test_removeAdjacentEqualLetters();
 }
 
 
 int main() {
-    testLib();
+    //testLib();
     test_tasks();
 
     return 0;

@@ -113,3 +113,15 @@ void assertString(const char *expected, char *got,
     } else
         fprintf(stderr, "%s - OK\n", funcName);
 }
+
+char *copyIf2(char *beginSource, const char *endSource, char *beginDestination, int (*f)(int,int)) {
+    while (beginSource < endSource) {
+        if (f(*beginSource,*(beginSource+1))) {
+            *beginDestination = *beginSource;
+            beginDestination++;
+        }
+        beginSource++;
+    }
+
+    return beginDestination;
+}
